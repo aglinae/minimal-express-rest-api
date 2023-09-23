@@ -5,7 +5,7 @@ const getUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-  const userId = parseInt(req.params.userId);
+  const userId = parseInt(req.params.id);
   const user = users.find((user) => {
     return user.id === userId;
   });
@@ -19,9 +19,11 @@ const createUser = (req, res) => {
       .status(400)
       .json({ success: false, msg: "please provide name value" });
   }
-  let user = { id: Date.now(), ...req.body };
+  const maxID = Math.max(...users.map((user) => user.id));
+  const newUserID = maxID + 1;
+  let user = { id: newUserID, ...req.body };
   users.push(user);
-  res.status(201).json({ success: true, data: user });
+  res.status(201).json({ success: true, data: users });
 };
 
 const updateUser = (req, res) => {
