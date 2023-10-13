@@ -1,5 +1,7 @@
-export interface User {
-  id: number;
+interface User {
+  readonly id: number;
   name: string;
   email: string;
 }
+
+export { User };
