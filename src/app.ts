@@ -1,15 +1,12 @@
 import express from "express";
-
-import { Request, Response } from "express";
-
-const PORT = 5000;
-
+import { usersRouter } from "./routes/users";
+const PORT = 3000;
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World");
-});
+app.use("/", usersRouter);
 
 app.listen(PORT, () => {
-  console.log("Hello World");
+  console.log("hello");
 });
